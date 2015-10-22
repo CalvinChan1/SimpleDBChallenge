@@ -75,8 +75,8 @@ def transactionCommands(transactionInput, dataBase, valuesDict, dbStack, valuesS
 
 		# previous db and values is pushed onto the stack
 		# saved in case of a rollback
-		dbStack.push(dataBase)
-		valuesStack.push(valuesDict)
+		dbStack.push(dataBase.copy())
+		valuesStack.push(valuesDict.copy())
 		
 		databaseCommands(dataBase, valuesDict, dbStack, valuesStack) 
 		
