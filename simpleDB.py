@@ -47,6 +47,7 @@ def databaseCommands(dataBase, valuesDict, dbStack, valuesStack):
 
 		elif dbCommand[0] == "UNSET":
 			name = dbCommand[1]
+			value = dataBase[name]
 			del dataBase[name]
 
 			if value in valuesDict:
@@ -84,14 +85,12 @@ def transactionCommands(transactionInput, dataBase, valuesDict, dbStack, valuesS
 		## Undo all of the commands issued in the most recent transaction block
 		## and close the block. Print Nothing if successful, or print "NO TRANSACTION"
 		## if no transaction is in progress
-		print dataBase
 
 		if dbStack.isEmpty() or valuesStack.isEmpty():
 			print "NO TRANSACTION"
 		else:
 			# revive last db and values from stack
 			dataBase = dbStack.pop() # not popping the right database
-			print dataBase
 			valuesDict = valuesStack.pop() 	
 
 		databaseCommands(dataBase, valuesDict, dbStack, valuesStack)
